@@ -1,7 +1,11 @@
 package com.example.mqdemo.config;
 
-import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -21,4 +25,17 @@ public class MqConfig {
         //connectionFactory.setPublisherConfirms(true);
         return connectionFactory;
     }
+
+    @Bean
+    public DirectExchange defaultExchange() {
+        return new DirectExchange("directExchange");
+    }
+
+    @Bean
+    public Queue queue() { //名字 是否持久化
+        return new Queue("testQueue", true);
+    }
+
+
+
 }
